@@ -1,0 +1,19 @@
+{
+    "name": "prestashop/kb_categorycustomfields",
+    "description": "module to display extra fields in category page",
+    "authors": [
+        {
+            "name": "Konrad Babiarz",
+            "email": "konrad.babiarz@tutanota.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Prestashop\\Module\\Kb_CategoryCustomFields\\": "src/"
+      },
+      "config": {
+        "prepend-autoloader": false
+      },
+      "type": "prestashop-module"
+    }
+}
