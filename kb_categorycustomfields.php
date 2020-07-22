@@ -13,6 +13,10 @@ use PrestaShopBundle\Form\Admin\Type\TranslatableType;
 
 class Kb_Categorycustomfields extends Module
 {
+    private $templates = [
+        'hook' => 'module:kb_categorycustomfields/views/templates/hook/categorySeo.tpl'
+    ];
+
     public function __construct()
     {
         $this->name = 'kb_categorycustomfields';
@@ -94,5 +98,10 @@ class Kb_Categorycustomfields extends Module
         $cat = new Category((int)$params['id']);
         $cat->seo_text = $data['seo_text'];
         $cat->update();
+    }
+
+    public function hookDisplayWrapperBottom($params)
+    {
+        return $this->fetch($this->templates['hook'], $this->getCacheId($this->name));
     }
 }

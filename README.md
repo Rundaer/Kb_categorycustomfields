@@ -16,6 +16,8 @@
 
 Module adds extra custom field to category page
 
+Now you can use `$category->seo_text`(seo_text it's just mine field value, place any as you would like)
+
 ### Warning
 
 If override class does not work, place it in root/override folder

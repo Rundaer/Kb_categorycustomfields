@@ -85,7 +85,9 @@ class Installer
         $hooks = [
             'actionCategoryFormBuilderModifier',
             'actionAfterUpdateCategoryFormHandler',
-            'actionAfterCreateCategoryFormHandler'
+            'actionAfterCreateCategoryFormHandler',
+            'displayFooterBefore',
+            'displayWrapperBottom'
         ];
 
         return (bool) $module->registerHook($hooks);

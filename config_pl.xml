@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>kb_categorycustomfields</name>
+    <displayName><![CDATA[Category custom fields]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Add custom fields to category page]]></description>
+    <author><![CDATA[Konrad Babiarz]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>
