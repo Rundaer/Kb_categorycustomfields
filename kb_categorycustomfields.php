@@ -8,8 +8,8 @@ require_once __DIR__.'/vendor/autoload.php';
 
 use Prestashop\Module\Kb_CategoryCustomFields\Install\InstallerFactory;
 use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use PrestaShopBundle\Form\Admin\Type\TranslatableType;
+use PrestaShopBundle\Form\Admin\Type\TranslateType;
+use PrestaShopBundle\Form\Admin\Type\FormattedTextareaType;
 
 class Kb_Categorycustomfields extends Module
 {
@@ -55,30 +55,33 @@ class Kb_Categorycustomfields extends Module
 
     public function hookActionCategoryFormBuilderModifier(array $params)
     {
+        $locales = $this->get('prestashop.adapter.legacy.context')->getLanguages();
+
         //Retrieving the form builder
         /** @var FormBuilder $formBuilder */
         $formBuilder = $params['form_builder'];
- 
+
         // https://devdocs.prestashop.com/1.7/development/components/form/types-reference/
         $formBuilder->add(
             'seo_text',
-            TranslatableType::class,
+            TranslateType::class,
             [
-                'label' => $this->l('Seo Text'),
-                'required' => false,
-                'type' => TextareaType::class
+                'type' => FormattedTextareaType::class,
+                'label' => $this->l('Seo text'),
+                'locales' => $locales,
+                'hideTabs' => false,
+                'required' => false
             ]
         );
 
-        // For more languages ??
-        // $languages = Language::getLanguages(true);
-        // foreach ($languages as $lang) {
-        //     $params['data']['seo_text'][$lang['id_lang']] = 'Custom value for lang '.$lang['iso_code'];
-        // }
 
-        $category = new Category($params['id']);
-        $params['data']['seo_text'] = $category->seo_text;
-
+        //For more languages ??
+        $languages = Language::getLanguages(true);
+        foreach ($languages as $lang) {
+            $category = new Category($params['id'], false, $lang['id_lang']);
+            $params['data']['seo_text'][$lang['id_lang']] = $category->seo_text[1];
+        }
+        
         //Remember to put this line to update the data in the form
         $formBuilder->setData($params['data']);
     }
